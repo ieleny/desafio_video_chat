@@ -1,0 +1,49 @@
+
+  body{
+    background-color: hsla(180, 72%, 63%, 0.801);
+  }
+
+  .page {
+    margin: 20px 0
+  }
+  
+  .wrapper {
+    max-width: 1160px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+    min-height: 600px;
+  }
+  
+  .content-wrapper {
+    float: left;
+    width: 100%;
+  }
+
+  .content {
+    margin-right: 320px;
+    clear: both;
+    overflow: auto;
+    background: #1ab1bc;
+    min-height: 600px;
+  }
+  
+  .sidebar {
+    position: relative;
+    width: 320px;
+    margin-left: -320px;
+    float: right;
+    overflow: hidden;
+    background: rgb(163, 236, 163);
+    color: #eee;
+    min-height: 600px;
+  }
+
+  .interno{
+      width: 300px;
+      min-height: 580px;
+      margin-top: 10px;
+      margin-left: 10px;
+      background-color:white;
+      color:black;
+  }
