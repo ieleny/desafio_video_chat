@@ -1,0 +1,47 @@
+body{
+  background-color: hsla(180, 72%, 63%, 0.801);
+}
+
+.page {
+  margin: 15px 0
+}
+
+.wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 20px;
+  min-height: 600px;
+}
+
+.content-wrapper {
+  float: left;
+  width: 100%;
+}
+
+.content {
+  margin-right: 500px;
+  clear: both;
+  overflow: auto;
+  background: #1fbc1a;
+  min-height: 600px;
+}
+
+.sidebar {
+  width: 500px;
+  margin-left: -500px;
+  float: right;
+  overflow: hidden;
+  background: rgb(163, 236, 163);
+  color: #eee;
+  min-height: 600px;
+}
+
+.interno{
+    width: 480px;
+    min-height: 580px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color:white;
+    color:black;
+}
