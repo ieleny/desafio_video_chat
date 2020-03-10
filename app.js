@@ -1,4 +1,5 @@
 
+//Chat
 var app = require('http').createServer(resposta); // Criando o servidor
 var fs = require('fs'); // Sistema de arquivos
 var io = require('socket.io')(app); // Socket.IO
@@ -31,8 +32,10 @@ function resposta(req, res) {
 }
 
 io.on("connection", function (socket) {
+
     // Método de resposta ao evento de entrar
     socket.on("entrar", function (apelido, callback) {
+
         if (!(apelido in usuarios)) {
             socket.apelido = apelido;
             usuarios[apelido] = socket; // Adicionadno o nome de usuário a lista armazenada no servidor
@@ -95,7 +98,6 @@ io.on("connection", function (socket) {
 
 });
 
-
 // Função para apresentar uma String com a data e hora em formato DD/MM/AAAA HH:MM:SS
 function pegarDataAtual() {
     var dataAtual = new Date();
@@ -118,3 +120,5 @@ function armazenaMensagem(mensagem) {
 
     ultimas_mensagens.push(mensagem);
 }
+
+
