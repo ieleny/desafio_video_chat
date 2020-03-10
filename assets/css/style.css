@@ -1,5 +1,5 @@
 body{
-  background-color: hsla(180, 72%, 63%, 0.801);
+  background-color: lightseagreen;
 }
 
 .page {
@@ -44,4 +44,76 @@ body{
     margin-left: 10px;
     background-color:white;
     color:black;
+}
+
+
+/* Tela Index */
+.box{
+  width: 60%;
+  height: 60%;
+  background-color:lavender;
+  box-shadow: 10px 10px 5px grey;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%) 
+}
+
+.button{
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#buttonIniciar{
+  background-color: #4CAF50;
+  margin-right: 5%;
+}
+
+#buttonVisualizar{
+  background-color: #008CBA;
+}
+
+#login{
+   margin-top: 5%;
+   margin-left: 25%;
+}
+
+div.box{
+    font-size: large;
+}
+
+input[type=text], select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.esconde{
+    display:none;
+    color: red;
+}
+
+
+/* Cor das Mensagens */
+#historico_mensagens .sistema{
+  background-color: #45C5BF;
+  color: #FFF;
+  font-weight: bold;
+}
+#historico_mensagens .privada{
+  background-color: #CCC;
+  color: #000;
+  font-weight: bold;
 }

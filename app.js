@@ -12,6 +12,7 @@ console.log("Aplicação está em execução...");
 
 // Função principal de resposta as requisições do servidor
 function resposta(req, res) {
+
     var arquivo = "";
     if (req.url == "/") {
         arquivo = __dirname + '/index.html';

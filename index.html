@@ -2,99 +2,127 @@
 <html>
 
 <head>
-    <title>Chat</title>
+    <title>ChatVoid</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 </head>
 
-<body>
+</body>
 
-    <div class="page">
-        <div class="wrapper">
-            <div class="content-wrapper">
-                <div class="content">
-                    <a href="views/emite.html">Start Video Stream</a>
-                    <a href="views/visualiza.html">Visualize Video Stream</a>
-                </div>
-            </div>
-            <div class="sidebar">
-                <div class="interno">
+<!-- LOGIN -->
+<div class="box">
+    <form id='login'>
+        <p>Insira seu Apelido(Identificação no Chat)</p>
+        <input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
+        <p class="esconde">Esse campo está vazio, por favor preencha para prosseguir</p>
 
-                    <!-- Div com o formulário de acesso, para inserir o apelido -->
-                    <div id='acesso_usuario'>
-                        <form id='login'>
-                            <input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
-                            <input type='submit' value='Entrar' />
-                        </form>
-                    </div>
+        <P>Selecione o Tipo de video</P>
+        <button type="button" class="button" id="buttonIniciar">Inicie o Vídeo</button>
+        <button type="button" class="button" id="buttonVisualizar">Visualizar o Vídeo</button>
+    </form>
+</div>
 
-                    <div id="historico_mensagens"></div>
-                    <form id="chat">
-                        <input type="text" id="texto_mensagem" name="texto_mensagem" />
-                        <input type="submit" value='Enviar mensagem!' />
-                    </form>
-                </div>
+<div class="page esconde">
+    <div class="wrapper">
+        <div class="content-wrapper">
+
+            <!-- Iniciador do Video -->
+
+
+            <!-- Visualizador do Video -->
+
+        </div>
+
+        <div class="sidebar">
+            <div class="interno">
+
+                <div id="historico_mensagens"></div>
+                <form id="chat">
+                    <input type="text" id="texto_mensagem" name="texto_mensagem" />
+                    <input type="submit" value='Enviar mensagem!' />
+                </form>
+
             </div>
         </div>
+
     </div>
+</div>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-        var socket = io.connect();
+    var socket = io.connect();
 
+    // Ao enviar uma mensagem
+    $("form#chat").submit(function (e) {
+        e.preventDefault();
 
-        // Ao enviar uma mensagem
-        $("form#chat").submit(function (e) {
-            e.preventDefault();
+        var mensagem = $(this).find("#texto_mensagem").val();
+        var usuario = $("#lista_usuarios").val(); // Usuário selecionado na lista lateral direita
 
-            var mensagem = $(this).find("#texto_mensagem").val();
-            var usuario = $("#lista_usuarios").val(); // Usuário selecionado na lista lateral direita
-
-            // Evento acionado no servidor para o envio da mensagem
-            // junto com o nome do usuário selecionado da lista
-            socket.emit("enviar mensagem", { msg: mensagem, usu: usuario }, function () {
-                $("form#chat #texto_mensagem").val("");
-            });
+        // Evento acionado no servidor para o envio da mensagem
+        // junto com o nome do usuário selecionado da lista
+        socket.emit("enviar mensagem", { msg: mensagem, usu: usuario }, function () {
+            $("form#chat #texto_mensagem").val("");
         });
+    });
 
-        // Resposta ao envio de mensagens do servidor
-        socket.on("atualizar mensagens", function (dados) {
-            var mensagem_formatada = $("<p />").text(dados.msg).addClass(dados.tipo);
-            $("#historico_mensagens").append(mensagem_formatada);
-        });
 
-        $("form#login").submit(function (e) {
-            e.preventDefault();
+    // Resposta ao envio de mensagens do servidor
+    socket.on("atualizar mensagens", function (dados) {
+        var mensagem_formatada = $("<p />").text(dados.msg).addClass(dados.tipo);
+        $("#historico_mensagens").append(mensagem_formatada);
+    });
 
-            // Evento enviado quando o usuário insere um apelido
-            socket.emit("entrar", $(this).find("#apelido").val(), function (valido) {
-                if (valido) {
-                    // Caso não exista nenhum usuário com o mesmo nome, o painel principal é exibido
-                    $("#acesso_usuario").hide();
-                    $("#sala_chat").show();
+    //O usuario visualizar o video
+    $("#buttonVisualizar").click(function (e) {
+
+        // Evento enviado quando o usuário insere um apelido
+        socket.emit("entrar", $("#apelido").val(), function (valido) {
+
+            if (valido) {
+
+                if ($('#apelido').val() === '') {
+                    $(".esconde").show();
                 } else {
-                    // Do contrário o campo de mensagens é limpo e é apresentado um alert
-                    $("#acesso_usuario").val("");
-                    alert("Nome já utilizado nesta sala");
+
+                    //Esconde os dados
+                    $(".esconde").hide();
+                    $(".box").hide();
+                    $(".page.esconde").show();
+
+                    //Apagar o campo
+                    $("#apelido").val("");
+
+                    //Mostrar a Sala
+                    $("#sala_chat").show();
                 }
-            });
-        });
 
-        // Quando servidor enviar uma nova lista de usuários
-        // o select é limpo e reinserida a opção Todos
-        // junto de toda a lista de usuários.
-        socket.on("atualizar usuarios", function (usuarios) {
-            $("#lista_usuarios").empty();
-            $("#lista_usuarios").append("<option value=''>Todos</option>");
-            $.each(usuarios, function (indice) {
-                var opcao_usuario = $("<option />").text(usuarios[indice]);
-                $("#lista_usuarios").append(opcao_usuario);
-            });
+            } else {
+                alert("Nome já utilizado nesta sala");
+            }
+
         });
 
 
-    </script>
+    });
+
+    // Quando servidor enviar uma nova lista de usuários
+    // o select é limpo e reinserida a opção Todos
+    // junto de toda a lista de usuários.
+    socket.on("atualizar usuarios", function (usuarios) {
+        $("#lista_usuarios").empty();
+        $("#lista_usuarios").append("<option value=''>Todos</option>");
+        $.each(usuarios, function (indice) {
+            var opcao_usuario = $("<option />").text(usuarios[indice]);
+            $("#lista_usuarios").append(opcao_usuario);
+        });
+    });
+
+
+
+</script>
 
 </body>
 
