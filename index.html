@@ -13,7 +13,8 @@
 <div class="box">
     <form id='login'>
         <p>Insira seu Apelido(Identificação no Chat)</p>
-        <input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido' />
+        <input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido'
+            onkeyup="this.value = this.value.toUpperCase();" maxlength="7" />
         <p class="esconde">Esse campo está vazio, por favor preencha para prosseguir</p>
 
         <P>Selecione o Tipo de video</P>
@@ -34,12 +35,12 @@
         </div>
 
         <div class="sidebar">
-            <div class="interno">
+            <div class="interno" id="sala_chat">
 
                 <div id="historico_mensagens"></div>
                 <form id="chat">
-                    <input type="text" id="texto_mensagem" name="texto_mensagem" />
-                    <input type="submit" value='Enviar mensagem!' />
+                    <input type="text" id="texto_mensagem" name="texto_mensagem" maxlength="20" />
+                    <input type="submit" value='Enviar mensagem!' id="buttonChat" class="button" />
                 </form>
 
             </div>

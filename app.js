@@ -38,8 +38,9 @@ io.on("connection", function (socket) {
     socket.on("entrar", function (apelido, callback) {
 
         if (!(apelido in usuarios)) {
+
             socket.apelido = apelido;
-            usuarios[apelido] = socket; // Adicionadno o nome de usuário a lista armazenada no servidor
+            usuarios[apelido] = socket; // Adicionando o nome de usuário a lista armazenada no servidor
 
             // Enviar para o usuário ingressante as ultimas mensagens armazenadas.
             for (indice in ultimas_mensagens) {
@@ -58,6 +59,7 @@ io.on("connection", function (socket) {
         } else {
             callback(false);
         }
+
     });
 
 
