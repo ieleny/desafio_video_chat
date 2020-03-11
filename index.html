@@ -33,16 +33,16 @@
 
                 <video src="" id="video" style="width:700px; height: 350px;" autoplay="true"></video>
                 <canvas style="display:none;" id="preview"></canvas>
-                <div id="logger"></div>
+                <p id="logger" ></p>
 
             </div>
 
             <!-- Visualizador do Video -->
             <div class="esconde" id="content-visualizar-video">
 
-                <img id="play">
-                <div id="logger"></div>
-
+                <img id="play" src="">
+                <p id="logger" ></p>
+                
             </div>
 
             </div>
@@ -116,6 +116,7 @@
 
                     //Mostrar Content Iniciar Video
                     $("#content-iniciar-video").show();
+                    $("#content-visualizar-video").hide();
                 }
 
             } else {
@@ -151,6 +152,7 @@
 
                     //Mostrar Content Visualizar Video
                     $("#content-visualizar-video").show();
+                    $("#content-iniciar-video").hide();
                 }
 
             } else {
@@ -180,8 +182,6 @@
 
 <!-- EMITE -->
 <script type="text/javascript">
-
-    var socket = io.connect();
 
     var canvas = document.getElementById("preview");
     var context = canvas.getContext('2d');
@@ -232,8 +232,6 @@
 
 <!-- Visualiza -->
 <script type="text/javascript">
-
-    var socket = io.connect();
 
     socket.on('stream', function (image) {
         $('#play').attr('src', image);
