@@ -8,16 +8,11 @@ Socket.io
 
 # Excutar
 
-npm install
-npm install -g nodemon
-
-nodemon app.js
+npm install <br>
+npm install -g nodemon <br>
+<br>
+nodemon app.js <br>
 
 # Acessar 
 http://localhost:3000/
 
-
-
-https://www.devmedia.com.br/como-criar-um-chat-com-node-js/33719
-https://www.w3schools.com/tags/ref_av_dom.asp
-https://www.youtube.com/watch?v=nG7OhBnfefE
