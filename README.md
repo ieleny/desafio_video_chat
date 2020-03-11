@@ -2,9 +2,8 @@
 Criar um sistema que faz transmissão em video e chat.
 
 # Tecnologias
-Node.js
-Express
-Socket.io
+- Node.js
+- Socket.io
 
 # Excutar
 
