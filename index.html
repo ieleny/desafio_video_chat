@@ -12,36 +12,30 @@
 <!-- LOGIN -->
 <div class="box">
     <form id='login'>
+        <span>Chat E-rural</span>
+        <br></br>
         <p>Insira seu Apelido(Identificação no Chat)</p>
         <input type='text' placeholder='Insira seu apelido' name='apelido' id='apelido'
-            onkeyup="this.value = this.value.toUpperCase();" maxlength="7" />
+            onkeyup="this.value = this.value.toUpperCase();" maxlength="10" required/>
         <p class="esconde">Esse campo está vazio, por favor preencha para prosseguir</p>
 
-        <P>Selecione o Tipo de video</P>
-        <button type="button" class="button" id="buttonIniciar">Inicie o Vídeo</button>
-        <button type="button" class="button" id="buttonVisualizar">Visualizar o Vídeo</button>
+        <button type="submit" class="button" id="buttonIniciar">Inicie o Bate Papo</button>
+
     </form>
 </div>
 
 <div class="page esconde">
+    
+    <span>Chat E-rural</span>
+
     <div class="wrapper">
         <div class="content-wrapper">
             <div class="content">
-            
-            <!-- Iniciador do Video -->
-            <div class="esconde" id="content-iniciar-video">
-
-                <video src="" id="video" style="width:700px; height: 350px;" autoplay="true"></video>
-                <canvas style="display:none;" id="preview"></canvas>
-                <!-- <p id="logger" ></p> -->
-
-            </div>
 
             <!-- Visualizador do Video -->
             <div class="esconde" id="content-visualizar-video">
 
-                <img id="play" src="">
-                <!-- <p id="logger" ></p> -->
+                <iframe width="100%" height="665px" src="https://www.youtube.com/embed/5KMfunb5Klk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 
             </div>
 
@@ -49,6 +43,9 @@
         </div>
 
         <div class="sidebar">
+
+            <span>Conversas</span>
+            
             <div class="interno" id="sala_chat">
                 <div id="historico_mensagens"></div>
                 <form id="chat">
@@ -92,68 +89,28 @@
     });
 
     //O usuario visualizar o video
-    $("#buttonIniciar").click(function (e) {
+    $("form#login").submit(function (e) {
+
+        e.preventDefault();
 
         // Evento enviado quando o usuário insere um apelido
         socket.emit("entrar", $("#apelido").val(), function (valido) {
 
             if (valido) {
 
-                if ($('#apelido').val() === '') {
-                    $(".esconde").show();
-                } else {
+                //Esconde os dados
+                $(".esconde").hide();
+                $(".box").hide();
+                $(".page.esconde").show();
 
-                    //Esconde os dados
-                    $(".esconde").hide();
-                    $(".box").hide();
-                    $(".page.esconde").show();
+                //Apagar o campo
+                $("#apelido").val("");
 
-                    //Apagar o campo
-                    $("#apelido").val("");
+                //Mostrar a Sala
+                $("#sala_chat").show();
 
-                    //Mostrar a Sala
-                    $("#sala_chat").show();
-
-                    //Mostrar Content Iniciar Video
-                    $("#content-iniciar-video").show();
-                    $("#content-visualizar-video").hide();
-                }
-
-            } else {
-                alert("Nome já utilizado nesta sala");
-            }
-
-        });
-
-
-    });
-
-    $("#buttonVisualizar").click(function (e) {
-
-        // Evento enviado quando o usuário insere um apelido
-        socket.emit("entrar", $("#apelido").val(), function (valido) {
-
-            if (valido) {
-
-                if ($('#apelido').val() === '') {
-                    $(".esconde").show();
-                } else {
-
-                    //Esconde os dados
-                    $(".esconde").hide();
-                    $(".box").hide();
-                    $(".page.esconde").show();
-
-                    //Apagar o campo
-                    $("#apelido").val("");
-
-                    //Mostrar a Sala
-                    $("#sala_chat").show();
-
-                    //Mostrar Content Visualizar Video
-                    $("#content-visualizar-video").show();
-                    $("#content-iniciar-video").hide();
-                }
+                //Mostrar Content Iniciar Video
+                $("#content-visualizar-video").show();
 
             } else {
                 alert("Nome já utilizado nesta sala");
