@@ -23,7 +23,7 @@ body{
   margin-right: 500px;
   clear: both;
   overflow: auto;
-  background: #1fbc1a;
+  background: cornsilk;
   min-height: 600px;
 }
 
@@ -108,4 +108,9 @@ input[type=text], select {
 .esconde{
     display:none;
     color: red;
+}
+
+/* Video */
+#content-iniciar-video{
+  padding-left: 1em;
 }

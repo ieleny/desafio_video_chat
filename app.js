@@ -85,6 +85,12 @@ io.on("connection", function (socket) {
         callback();
     });
 
+    //Video 
+    socket.on('stream', function (image) {
+        socket.broadcast.emit('stream', image);
+    });
+    
+
     socket.on("disconnect", function () {
         delete usuarios[socket.apelido];
         var mensagem = "[ " + pegarDataAtual() + " ] " + socket.apelido + " saiu da sala";

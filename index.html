@@ -181,6 +181,8 @@
 <!-- EMITE -->
 <script type="text/javascript">
 
+    var socket = io.connect();
+
     var canvas = document.getElementById("preview");
     var context = canvas.getContext('2d');
 
@@ -202,11 +204,11 @@
         } catch (error) {
             video.src = URL.createObjectURL(stream);
         }
-        logger("Camera connected");
+        logger("Camera Conectada");
     }
 
     function loadFail() {
-        logger("Camera not connected");
+        logger("Não foi Possivel encontrar a camera");
     }
 
     function viewVideo(video, context) {
@@ -230,6 +232,8 @@
 
 <!-- Visualiza -->
 <script type="text/javascript">
+
+    var socket = io.connect();
 
     socket.on('stream', function (image) {
         $('#play').attr('src', image);
